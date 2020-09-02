@@ -2,7 +2,11 @@
     <div>
         <h2>Page pour le tableau des scores</h2>
 
-        <p>Prévoir bouton pour lancer le jeu</p>
+        <router-link
+                    :to="{ name: 'game' }"
+                    class="button"
+                    >Go !</router-link
+                >
     </div>
 </template>
 <style scoped>

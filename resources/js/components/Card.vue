@@ -1,7 +1,16 @@
 <template>
     <div class="card">
-        <img v-if="!hidden" @click="emitHideState" :src="source" />
-        <img v-if="hidden" @click="emitHideState" :src="dos" />
+        <img
+            v-if="!hidden && !this.cardInfo.found"
+            @click="emitHideState"
+            :src="cardInfo.uri"
+        />
+        <img
+            v-if="hidden && !this.cardInfo.found"
+            @click="emitHideState"
+            :src="dos"
+        />
+        <img v-if="this.cardInfo.found" :src="cardInfo.uri" />
     </div>
 </template>
 <style scoped>
@@ -29,14 +38,11 @@ img {
 </style>
 <script>
 import dos from "../../../images/dos.jpg";
+
 export default {
     props: {
-        hide: {
-            type: Boolean,
-            required: true
-        },
-        source: {
-            type: String,
+        cardInfo: {
+            type: Object,
             required: true
         }
     },
@@ -49,16 +55,19 @@ export default {
     computed: {
         toHide() {
             if (this.hidden) {
-                return this.hide;
+                return this.cardInfo.hide;
             } else {
-                return !this.hide;
+                return !this.cardInfo.hide;
             }
         }
     },
     methods: {
         emitHideState() {
             this.hidden = !this.hidden;
-            this.$emit("hideState", { uri: this.source, hidden: this.hidden });
+            this.$emit("hideState", this.cardInfo);
+            setTimeout(() => {
+                this.hidden = !this.hidden;
+            }, 3000);
         }
     }
 };

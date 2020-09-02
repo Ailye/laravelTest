@@ -13,10 +13,6 @@
                     class="button"
                     >Go !</router-link
                 >
-                <button
-                @click="log">
-                log
-                </button>
             </div>
         </div>
     </div>
@@ -60,10 +56,5 @@
 </style>
 <script>
 export default {
-    methods: {
-        log() {
-            console.log('coucou');
-        }
-    }
 };
 </script>

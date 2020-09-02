@@ -2135,6 +2135,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2179,15 +2183,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    hide: {
-      type: Boolean,
-      required: true
-    },
-    source: {
-      type: String,
+    cardInfo: {
+      type: Object,
       required: true
     }
   },
@@ -2200,19 +2209,21 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     toHide: function toHide() {
       if (this.hidden) {
-        return this.hide;
+        return this.cardInfo.hide;
       } else {
-        return !this.hide;
+        return !this.cardInfo.hide;
       }
     }
   },
   methods: {
     emitHideState: function emitHideState() {
+      var _this = this;
+
       this.hidden = !this.hidden;
-      this.$emit("hideState", {
-        uri: this.source,
-        hidden: this.hidden
-      });
+      this.$emit("hideState", this.cardInfo);
+      setTimeout(function () {
+        _this.hidden = !_this.hidden;
+      }, 3000);
     }
   }
 });
@@ -2287,6 +2298,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2306,77 +2337,148 @@ __webpack_require__.r(__webpack_exports__);
     return {
       arrayOfCards: __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js").shuffle([{
         uri: _images_fred_jpg__WEBPACK_IMPORTED_MODULE_1___default.a,
-        hidden: true
+        name: "fred",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_fred_jpg__WEBPACK_IMPORTED_MODULE_1___default.a,
-        hidden: true
+        name: "fred",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_juliette_jpg__WEBPACK_IMPORTED_MODULE_2___default.a,
-        hidden: true
+        name: "juliette",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_juliette_jpg__WEBPACK_IMPORTED_MODULE_2___default.a,
-        hidden: true
+        name: "juliette",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_kevin_jpg__WEBPACK_IMPORTED_MODULE_3___default.a,
-        hidden: true
+        name: "kevin",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_kevin_jpg__WEBPACK_IMPORTED_MODULE_3___default.a,
-        hidden: true
+        name: "kevin",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_killian_jpg__WEBPACK_IMPORTED_MODULE_4___default.a,
-        hidden: true
+        name: "killian",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_killian_jpg__WEBPACK_IMPORTED_MODULE_4___default.a,
-        hidden: true
+        name: "killian",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_laurent_jpg__WEBPACK_IMPORTED_MODULE_5___default.a,
-        hidden: true
+        name: "laurent",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_laurent_jpg__WEBPACK_IMPORTED_MODULE_5___default.a,
-        hidden: true
+        name: "laurent",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_paul_jpg__WEBPACK_IMPORTED_MODULE_6___default.a,
-        hidden: true
+        name: "paul",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_paul_jpg__WEBPACK_IMPORTED_MODULE_6___default.a,
-        hidden: true
+        name: "paul",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_romain_jpg__WEBPACK_IMPORTED_MODULE_7___default.a,
-        hidden: true
+        name: "romain",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_romain_jpg__WEBPACK_IMPORTED_MODULE_7___default.a,
-        hidden: true
+        name: "romain",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_sylvain_jpg__WEBPACK_IMPORTED_MODULE_8___default.a,
-        hidden: true
+        name: "sylvain",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_sylvain_jpg__WEBPACK_IMPORTED_MODULE_8___default.a,
-        hidden: true
+        name: "sylvain",
+        hidden: true,
+        twin: false,
+        found: false
       }, {
         uri: _images_tony_jpg__WEBPACK_IMPORTED_MODULE_9___default.a,
-        hidden: true
+        name: "tony",
+        hidden: true,
+        twin: true,
+        found: false
       }, {
         uri: _images_tony_jpg__WEBPACK_IMPORTED_MODULE_9___default.a,
-        hidden: true
+        name: "tony",
+        hidden: true,
+        twin: 2,
+        found: false
       }]),
       arrayOfMatchs: [],
-      toMatch: []
+      toMatch: [],
+      score: 0
     };
   },
   methods: {
     dealWithHideStateEmitted: function dealWithHideStateEmitted(card) {
-      this.toMatch.push(card.uri);
+      this.toMatch.push(card);
     },
     checkingMatch: function checkingMatch(card) {
-      if (this.arrayOfMatchs.length === 9) {
-        alert("You won !");
-      }
+      this.score++;
 
       if (this.toMatch.length > 1) {
-        if (this.toMatch[0] === card.uri) {
-          this.toMatch = [];
-          this.arrayOfMatchs.push(true);
-        } else this.toMatch = [];
+        if (this.toMatch[0].name === card.name && this.toMatch[0].twin !== card.twin) {
+          this.toMatch = this.toMatch.slice(1, 1);
+
+          if (this.arrayOfMatchs.indexOf(card.name) === -1) {
+            this.arrayOfMatchs.push(card.name);
+            alert("Bien jou\xE9, vous avez trouv\xE9 ".concat(card.name));
+            var indexOfFound = [];
+            this.arrayOfCards.forEach(function (element, index) {
+              if (element.name === card.name) {
+                indexOfFound.push(index);
+              }
+            });
+            this.arrayOfCards[indexOfFound[0]].found = true;
+            this.arrayOfCards[indexOfFound[1]].found = true;
+          }
+        } else {
+          this.toMatch = this.toMatch.slice(1, 1);
+        }
+      }
+
+      if (this.arrayOfMatchs.length === 9) {
+        alert("You won !");
       }
     }
   }
@@ -2722,17 +2824,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    log: function log() {
-      console.log('coucou');
-    }
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -7206,7 +7298,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-3a2c79dd] {\n    overflow: visible;\n    outline: 1px dashed black;\n    border: 0;\n    padding: 6px 0 2px 8px;\n    width: 100%;\n    height: 100%;\n    resize: none;\n}\n#cards[data-v-3a2c79dd] {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n}\n#card[data-v-3a2c79dd] {\n    margin: auto;\n}\n", ""]);
+exports.push([module.i, "\np[data-v-3a2c79dd] {\n    overflow: visible;\n    border: 0;\n    padding: 6px 0 2px 8px;\n    width: 100%;\n    height: 100%;\n    resize: none;\n    font-size: 18px;\n}\n.flex-center[data-v-3a2c79dd] {\n    align-items: center;\n    display: flex;\n    justify-content: center;\n    margin-top: 50px;\n}\n#cards[data-v-3a2c79dd] {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n}\n#card[data-v-3a2c79dd] {\n    margin: auto;\n}\n#rules[data-v-3a2c79dd] {\n    margin-left: 5%;\n    margin-right: 5%;\n}\n", ""]);
 
 // exports
 
@@ -39239,20 +39331,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+  return _c(
+    "div",
+    [
       _c("h2", [_vm._v("Page pour le tableau des scores")]),
       _vm._v(" "),
-      _c("p", [_vm._v("Prévoir bouton pour lancer le jeu")])
-    ])
-  }
-]
+      _c(
+        "router-link",
+        { staticClass: "button", attrs: { to: { name: "game" } } },
+        [_vm._v("Go !")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39275,15 +39368,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    !_vm.hidden
+    !_vm.hidden && !this.cardInfo.found
       ? _c("img", {
-          attrs: { src: _vm.source },
+          attrs: { src: _vm.cardInfo.uri },
           on: { click: _vm.emitHideState }
         })
       : _vm._e(),
     _vm._v(" "),
-    _vm.hidden
+    _vm.hidden && !this.cardInfo.found
       ? _c("img", { attrs: { src: _vm.dos }, on: { click: _vm.emitHideState } })
+      : _vm._e(),
+    _vm._v(" "),
+    this.cardInfo.found
+      ? _c("img", { attrs: { src: _vm.cardInfo.uri } })
       : _vm._e()
   ])
 }
@@ -39309,8 +39406,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h2", [_vm._v("Game on")]),
+  return _c("div", { attrs: { id: "main" } }, [
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "div",
@@ -39329,7 +39426,7 @@ var render = function() {
           },
           [
             _c("Card", {
-              attrs: { source: card.uri, hide: card.hidden },
+              attrs: { cardInfo: card },
               on: { hideState: _vm.dealWithHideStateEmitted }
             })
           ],
@@ -39337,10 +39434,29 @@ var render = function() {
         )
       }),
       0
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex-center" }, [
+      _c("h2", [_vm._v("Votre score : " + _vm._s(_vm.score))])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "rules" } }, [
+      _c("h4", [_vm._v("Règles :")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n            Le but est de trouver les 9 paires cachées dans les cartes\n            ci-dessous. Cliquez sur une carte pour la découvrir pendant 3s,\n            retenez sa position et sa figure. Pour valider une paire il vous\n            faudra découvrir les 2 cartes associées à la suite. Une message\n            d'alerte apparaîtra pour prouver la validation de la paire.\n        "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39712,11 +39828,7 @@ var render = function() {
             "router-link",
             { staticClass: "button", attrs: { to: { name: "game" } } },
             [_vm._v("Go !")]
-          ),
-          _vm._v(" "),
-          _c("button", { on: { click: _vm.log } }, [
-            _vm._v("\n            log\n            ")
-          ])
+          )
         ],
         1
       )
