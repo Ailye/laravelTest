@@ -3,11 +3,20 @@
         <div class="content">
             <div class="m-b-md">
                 <h2 class="title m-b-md">
-                    Treclon
+                    Memory
                 </h2>
                 <h3>
-                    Your efficent task planner
+                    Let's play some games
                 </h3>
+                <router-link
+                    :to="{ name: 'game' }"
+                    class="button"
+                    >Go !</router-link
+                >
+                <button
+                @click="log">
+                log
+                </button>
             </div>
         </div>
     </div>
@@ -50,5 +59,11 @@
 }
 </style>
 <script>
-export default {};
+export default {
+    methods: {
+        log() {
+            console.log('coucou');
+        }
+    }
+};
 </script>

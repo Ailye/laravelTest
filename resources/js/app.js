@@ -7,6 +7,10 @@ Vue.use(VueRouter)
 
 import App from './components/App'
 import Welcome from './components/Welcome'
+import Login from './components/Login.vue'
+import Register from './components/Register.vue'
+import Board from './components/Board.vue'
+import Game from './components/Game.vue'
 
 const router = new VueRouter({
     mode: 'history',
@@ -29,8 +33,13 @@ const router = new VueRouter({
         {
             path: '/board',
             name: 'board',
-            component: Dashboard,
+            component: Board,
         },
+        {
+            path: './game',
+            name: 'game',
+            component: Game
+        }
     ],
 });
 

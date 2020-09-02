@@ -1,3 +1,10 @@
+<template>
+    <div>
+        <h2>Page pour le tableau des scores</h2>
+
+        <p>Prévoir bouton pour lancer le jeu</p>
+    </div>
+</template>
 <style scoped>
 .card {
     border: 0;
@@ -25,3 +32,6 @@ textarea {
     resize: none;
 }
 </style>
+<script>
+export default {};
+</script>

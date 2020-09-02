@@ -121,7 +121,8 @@ export default {
                         name: this.name,
                         email: this.email,
                         password: this.password,
-                        c_password: this.password_confirmation
+                        c_password: this.password_confirmation,
+                        score: 0
                     })
                     .then(response => {
                         localStorage.setItem(

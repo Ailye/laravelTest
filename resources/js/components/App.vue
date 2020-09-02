@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <router-link :to="{ name: 'home' }" class="navbar-brand"
-                    >Treclon</router-link
+                    >Memory</router-link
                 >
                 <button
                     class="navbar-toggler"
