@@ -23,16 +23,7 @@ return [
     */
 
     // 'default' => env('DB_CONNECTION', 'mysql'),
-    'default' => [
-        'driver' => 'mysql',
-        'host' => 'us-cdbr-east-02.cleardb.com',
-        'database' => 'heroku_aadc7d42e83d1e1',
-        'username' => 'b9eaaef15f2893',
-        'password' => '20fd99d4@us-cdbr-east-02',
-        'charset' => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix' => '',
-    ],
+    'default' => 'your_heroku_mysql_connection',
 
     /*
     |--------------------------------------------------------------------------
