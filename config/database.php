@@ -4,10 +4,10 @@ use Illuminate\Support\Str;
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+$host = 'us-cdbr-east-02.cleardb.com';
+$username = 'b9eaaef15f2893';
+$password = '20fd99d4@us-cdbr-east-02';
+$database = 'heroku_aadc7d42e83d1e1';
 
 return [
 
@@ -44,16 +44,16 @@ return [
     'connections' => [
 
         [
-            'your_heroku_mysql_connection' => array(
+            'your_heroku_mysql_connection' => [
                 'driver' => 'mysql',
-                'host' => 'us-cdbr-east-02.cleardb.com',
-                'database' => 'heroku_aadc7d42e83d1e1',
-                'username' => 'b9eaaef15f2893',
-                'password' => '20fd99d4',
+                'host' => $host,
+                'database' => $database,
+                'username' => $username,
+                'password' => $password,
                 'charset' => 'utf8',
                 'collation' => 'utf8_unicode_ci',
                 'prefix' => '',
-            ),
+            ],
         ],
 
         'sqlite' => [
